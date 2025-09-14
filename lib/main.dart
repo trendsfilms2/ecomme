@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
-import 'screens/splash_screen.dart';
+import 'config/firebase_config.dart';
+import 'config/multi_provider_setup.dart';
+import 'screens/main_app.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeFirebase();
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ecom App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: SplashScreen(),
-    );
-  }
+  runApp(withMultiProvider(const MainApp()));
 }
